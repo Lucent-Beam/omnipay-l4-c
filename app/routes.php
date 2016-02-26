@@ -11,5 +11,7 @@
 |
 */
 
+Route::get('/', 'PaymentController@index');
 Route::get('pay','PaymentController@postPayment');
-Route::get('rest','PaymentController@rest');
+Route::post('rest','PaymentController@rest');
+Route::get('payform','PaymentController@payform');

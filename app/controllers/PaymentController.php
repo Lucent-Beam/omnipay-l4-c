@@ -18,11 +18,16 @@ class PaymentController extends BaseController {
 	|
 	*/
 
-  public function postPayment(){
-        
+  public function index(){
+
+    return View::make('card');
 
 
+  }
 
+  public function payform(){
+
+    return View::make('credit');
 
   }
 
@@ -39,18 +44,20 @@ class PaymentController extends BaseController {
 
 
  #### Direct Credit Card Payment
-
-
+//'number' => '4032037583199993',
+//02
+//2021
+//123
    // Create a credit card object
    // DO NOT USE THESE CARD VALUES -- substitute your own
    // see the documentation in the class header.
    $card = new CreditCard(array(
-               'firstName' => 'Example',
-               'lastName' => 'User',
-               'number' => '4111111111111111',
-               'expiryMonth'           => '01',
-               'expiryYear'            => '2020',
-               'cvv'                   => '123',
+               'firstName' => 'Luis',
+               'lastName' => 'Charres',
+               'number' => $_POST['card-number'],
+               'expiryMonth'           => $_POST['expiry-month'],
+               'expiryYear'            => $_POST['expiry-year'],
+               'cvv'                   => $_POST['cvv'],
               'billingAddress1'       => '1 Scrubby Creek Road',
              'billingCountry'        => 'AU',
                'billingCity'           => 'Scrubby Creek',
@@ -62,7 +69,7 @@ class PaymentController extends BaseController {
    try {
        $transaction = $gateway->purchase(array(
            'amount'        => '10.00',
-           'currency'      => 'AUD',
+           'currency'      => 'USD',
            'description'   => 'This is a test purchase transaction.',
            'card'          => $card,
      ));
